@@ -1,4 +1,4 @@
-import React, {PropType} from 'react';
+import React, { PropType } from 'react';
 import { Link, IndexLink } from 'react-router';
 
 const HEader = () => {
