@@ -1,4 +1,9 @@
+import * as types from './actionTypes';
 import catApi from '../api/catApi';
+
+export function loadCatsSuccess(cats) {
+  return {type: types.LOAD_CATS_SUCCESS, cats};
+}
 
 export function loadCats() {
   return function(dispatch) {
