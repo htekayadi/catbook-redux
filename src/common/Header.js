@@ -1,7 +1,7 @@
 import React, { PropType } from 'react';
 import { Link, IndexLink } from 'react-router';
 
-const HEader = () => {
+const Header = () => {
   return (
     <nav>
       <IndexLink to="/"
