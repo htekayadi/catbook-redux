@@ -9,9 +9,13 @@ CatPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  return {
-    cats: state.cats
-  };
+  let cat = {name: '', breed: '', weight: '', temperament:'', hobby_ids: []};
+  const catId = ownProps.params.id;
+  if(state.cats.length > 0) {
+    cat = Object.assign({}, state.cats.find(cat => cat.id == id))
+  }
+  return {cat: cat};
 }
 
 export default connect(mapStateToProps)(CatPage);
+

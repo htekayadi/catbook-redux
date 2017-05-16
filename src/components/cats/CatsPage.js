@@ -1,8 +1,12 @@
 import CatList from './CatList';
 
 class CatsPage extends React.Component {
-  const cat = this.props.cats;
+  constructor(props, context) {
+    super(props, context);
+  }
+
   render() {
+    const cat = this.props.cats;
     return (
       <div className="col-md-12">
         <h1>Cats</h1>
