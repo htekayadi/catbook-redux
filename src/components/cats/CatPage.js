@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as catActions from '../../actions/catActions';
 import HobbyList from '../hobbies/HobbyList';
 
 class CatPage extends React.Component {
@@ -79,7 +81,8 @@ class CatPage extends React.Component {
 CatPage.propTypes = {
   cat: PropTypes.object.isRequired,
   cats: PropTypes.array.isRequired,
-  checkBoxHobbies: PropTypes.array.isRequired
+  checkBoxHobbies: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 function collectCatHobbies(hobbies, cat) {
@@ -125,6 +128,11 @@ function mapStateToProps(state, ownProps) {
   return {cat: cat, checkBoxHobbies: checkBoxHobbies, catHobbies: catHobbies};
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(catActions, dispatch)
+  };
+}
 
-export default connect(mapStateToProps)(CatPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CatPage);
 
