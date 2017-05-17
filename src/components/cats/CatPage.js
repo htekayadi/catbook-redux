@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as catActions from '../../actions/catActions';
 import HobbyList from '../hobbies/HobbyList';
+import CatForm from './CatForm';
 
 class CatPage extends React.Component {
   constructor(props, context) {
