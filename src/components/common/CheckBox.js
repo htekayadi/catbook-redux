@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react';
+  import React, {PropTypes} from 'react';
 
 class CheckBox extends React.Component {
   render() {
     return (
-      <div className="field">
+     <div className="field">
         <div>
           <label>{this.props.item.name}</label>
           <input type="checkbox" name={this.props.item.name} value={this.props.item.id} checked={this.props.item.checked} onChange={this.props.handleChange}/>
@@ -14,7 +14,7 @@ class CheckBox extends React.Component {
 }
 
 CheckBox.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired, 
   handleChange: PropTypes.func.isRequired
 };
 

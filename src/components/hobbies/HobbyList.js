@@ -1,14 +1,22 @@
 import React, {PropTypes} from 'react';
+import HobbyListRow from './HobbyListRow';
 
 const HobbyList = ({hobbies}) => {
-  return(
+  return (
     <div>
       <h3>Hobbies</h3>
-      <ul>
-        {hobbies.map(hobby =>
-          <li key={hobby.id}>{hobby.name}</li>
-        )}
-      </ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {hobbies.map(hobby => 
+            <HobbyListRow key={hobby.id} hobby={hobby} />
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

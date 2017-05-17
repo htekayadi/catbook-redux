@@ -1,3 +1,11 @@
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {browserHistory} from 'react-router';
+import * as courseActions from '../../actions/catActions';
+import CatForm from './CatForm';
+
+
 class NewCatPage extends React.Component {
 
   constructor(props) {
@@ -12,11 +20,6 @@ class NewCatPage extends React.Component {
     this.updateCatState = this.updateCatState.bind(this);
   }
 
-  saveCat(event) {
-    event.preventDefault();
-    this.props.actions.createCat(this.state.cat)
-  }
-
   updateCatHobbies(event) {
     const cat = this.state.cat;
     const hobbyId = event.target.value;
@@ -25,7 +28,7 @@ class NewCatPage extends React.Component {
     hobby['checked'] = !hobby.checked;
     if (checked) {
       cat.hobby_ids.push(hobby.id);
-    } else {
+    } else {  
       cat.hobby_ids.splice(cat.hobby_ids.indexOf(hobby.id));
     }
 
@@ -39,12 +42,25 @@ class NewCatPage extends React.Component {
     return this.setState({cat: cat});
   }
 
+  redirect(cat) {
+    browserHistory.push(`/cats/${cat.id}`);
+  }
+
+  saveCat(event) {
+    event.preventDefault();
+    this.props.actions.createCat(this.state.cat)
+    // .then((cat) => {
+    //   this.redirect(cat);
+    // });
+
+  }
+  
   render() {
     return (
       <div>
         <h1>new cat</h1>
-        <CatForm
-          cat={this.state.cat}
+        <CatForm 
+          cat={this.state.cat} 
           hobbies={this.props.checkBoxHobbies}
           onSave={this.saveCat}
           onChange={this.updateCatState}
@@ -62,9 +78,11 @@ function hobbiesForCheckBoxes(hobbies) {
 }
 
 NewCatPage.propTypes = {
-  checkBoxHobbies: PropTypes.array.isRequired,
+  checkBoxHobbies: PropTypes.array.isRequired, 
   actions: PropTypes.object.isRequired
 };
+
+
 
 function mapStateToProps(state, ownProps) {
   let checkBoxHobbies = [];
@@ -77,10 +95,16 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDisPatchToPRops(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(courseActions, dispatch)
   };
 }
 
-export default connect(mapStateToProps, mapDisPatchToPRops)(NewCatPage);
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewCatPage);
+
+
+
+
+

@@ -1,7 +1,8 @@
-import CheckBox from "../../common/CheckBox";
+import React, {PropTypes} from 'react';
+import TextInput from '../common/TextInput';
+import CheckBox from '../common/CheckBox';
 
 class CatForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
@@ -28,7 +29,7 @@ class CatForm extends React.Component {
 
           <TextInput
             name="breed"
-            label="breed"
+            label="Breed"
             value={this.props.cat.breed}
             onChange={this.props.onChange}/>
 
@@ -52,7 +53,7 @@ class CatForm extends React.Component {
             onClick={this.props.onSave}/>
         </form>
       </div>
-    );
+  );
   }
 }
 
@@ -63,6 +64,6 @@ CatForm.propTypes = {
   onChange: React.PropTypes.func.isRequired,
   onHobbyChange: React.PropTypes.func.isRequired,
   saving: React.PropTypes.bool
-}
+};
 
 export default CatForm;

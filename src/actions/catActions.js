@@ -1,16 +1,16 @@
 import * as types from './actionTypes';
-import catApi from '../api/catApi';
+import catApi from '../api/CatsApi';
 
 export function loadCatsSuccess(cats) {
   return {type: types.LOAD_CATS_SUCCESS, cats};
 }
 
-export function createCatSuccess(cat) {
-  return {type: types.CREATE_CAT_SUCCESS, cat};
+export function updateCatSuccess(cat) {
+  return {type: types.UPDATE_CAT_SUCCESS, cat}
 }
 
-export function updateCatSuccess(cat) {
-  return {type: types.UPDATE_CAT_SUCCESS, cat};
+export function createCatSuccess(cat) {
+  return {type: types.CREATE_CAT_SUCCESS, cat}
 }
 
 export function deleteCatSuccess(cat) {
@@ -18,20 +18,10 @@ export function deleteCatSuccess(cat) {
 }
 
 export function loadCats() {
-  return function (dispatch) {
+  // make async call to api, handle promise, dispatch action when promise is resolved
+  return function(dispatch) {
     return catApi.getAllCats().then(cats => {
       dispatch(loadCatsSuccess(cats));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
-export function createCat(cat) {
-  return function (dispatch) {
-    return  catApi.createCat(cat).then(responseCat => {
-      dispatch(createCatSuccess(responseCat));
-      return responseCat;
     }).catch(error => {
       throw(error);
     });
@@ -48,14 +38,32 @@ export function updateCat(cat) {
   };
 }
 
-export function deleteCat(cat) {
+export function createCat(cat) {
   return function (dispatch) {
-    return catApi.deleteCat(cat).then(() => {
-      console.log('Deleted ${cat.id}')
-      dispatch(deleteCatSuccess(cat));
-      return;
+    return catApi.createCat(cat).then(responseCat => {
+      dispatch(createCatSuccess(responseCat));
+      return responseCat;
     }).catch(error => {
       throw(error);
     });
   };
 }
+
+export function deleteCat(cat) {
+  return function(dispatch) {
+    return catApi.deleteCat(cat).then(() => {
+      console.log(`Deleted ${cat.id}`)
+      dispatch(deleteCatSuccess(cat));
+      return;
+    }).catch(error => {
+      throw(error);
+    })
+  }
+}
+
+
+
+
+
+
+
