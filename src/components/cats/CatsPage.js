@@ -9,7 +9,11 @@ class CatsPage extends React.Component {
     const cat = this.props.cats;
     return (
       <div className="col-md-12">
-        <h1>Cats</h1>
+        <h1>Cats
+          <Link to={'/cats/new'} className="btn btn-primary">
+            + cat
+          </Link>
+        </h1>
         <div className="col-md-4">
           <CatList cats={cats} />
         </div>
